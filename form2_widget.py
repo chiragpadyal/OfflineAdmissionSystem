@@ -1,0 +1,246 @@
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+#form is h_cont
+class Ui_Form(object):
+
+
+
+    def __init__(self, Form): #step 2 init
+        self.setupUi( Form )
+
+    def setupUi(self, Obj):
+        Form = Obj.page2_holder #step 3 set page #step 4 remove the hoz from main temp
+        Form.setObjectName("Form")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.main_middle_scroll_area = QtWidgets.QScrollArea(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.main_middle_scroll_area.sizePolicy().hasHeightForWidth())
+        self.main_middle_scroll_area.setSizePolicy(sizePolicy)
+        self.main_middle_scroll_area.setMinimumSize(QtCore.QSize(0, 100))
+        self.main_middle_scroll_area.setStyleSheet("\n"
+"\n"
+"QLabel{\n"
+"    font-family: \"DejaVu Serif\" ;\n"
+"\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"height: 30px;\n"
+"\n"
+"}\n"
+"QDateEdit{\n"
+"height: 30px;\n"
+"\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"height: 30px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"/*\n"
+"QScrollArea{\n"
+"  border: 1px solid black;\n"
+"border-top-left-radius: 30px;\n"
+"border-top-right-radius: 30px;\n"
+"padding-left: 30px;\n"
+"padding-right: 30px;\n"
+"padding-top: 10px;\n"
+"padding-bottom: 10px;\n"
+"}\n"
+"*/\n"
+"QScrollArea{\n"
+"\n"
+"}\n"
+"        QScrollBar:vertical {\n"
+"            border: none;\n"
+"            background: none;\n"
+"            width:15px;    \n"
+"            margin: 0px 0px 0px 0px;\n"
+"\n"
+"        }\n"
+"\n"
+"        QScrollBar::handle:vertical {\n"
+"            background: lightgray;\n"
+"border: 0px solid red;\n"
+"border-radius: 3px;\n"
+"        }\n"
+"\n"
+"        QScrollBar::add-line:vertical {\n"
+"            background: none;\n"
+"\n"
+"\n"
+"        }\n"
+"\n"
+"        QScrollBar::sub-line:vertical {\n"
+"            background: none;\n"
+"\n"
+"        }\n"
+"\n"
+"\n"
+"\n"
+"")
+        self.main_middle_scroll_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.main_middle_scroll_area.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.main_middle_scroll_area.setWidgetResizable(True)
+        self.main_middle_scroll_area.setObjectName("main_middle_scroll_area")
+        self.middle_scroll_area_vcont = QtWidgets.QWidget()
+        self.middle_scroll_area_vcont.setGeometry(QtCore.QRect(0, 0, 421, 794))
+        self.middle_scroll_area_vcont.setObjectName("middle_scroll_area_vcont")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.middle_scroll_area_vcont)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.personal_info_header = QtWidgets.QLabel(self.middle_scroll_area_vcont)
+        self.personal_info_header.setStyleSheet("*{font-family:  \"DejaVu Math TeX Gyre\";\n"
+"    font-size:20px\n"
+"}")
+        self.personal_info_header.setObjectName("personal_info_header")
+        self.verticalLayout_10.addWidget(self.personal_info_header)
+        self.under_personal_header_line = QtWidgets.QFrame(self.middle_scroll_area_vcont)
+        self.under_personal_header_line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.under_personal_header_line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.under_personal_header_line.setObjectName("under_personal_header_line")
+        self.verticalLayout_10.addWidget(self.under_personal_header_line)
+        self.profile_pic_label = QtWidgets.QLabel(self.middle_scroll_area_vcont)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.profile_pic_label.sizePolicy().hasHeightForWidth())
+        self.profile_pic_label.setSizePolicy(sizePolicy)
+        self.profile_pic_label.setObjectName("profile_pic_label")
+        self.verticalLayout_10.addWidget(self.profile_pic_label)
+        self.image_vcont = QtWidgets.QHBoxLayout()
+        self.image_vcont.setObjectName("image_vcont")
+        self.image_profile = QtWidgets.QLabel(self.middle_scroll_area_vcont)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.image_profile.sizePolicy().hasHeightForWidth())
+        self.image_profile.setSizePolicy(sizePolicy)
+        self.image_profile.setMaximumSize(QtCore.QSize(100, 100))
+        self.image_profile.setAutoFillBackground(False)
+        self.image_profile.setStyleSheet("")
+        self.image_profile.setText("")
+        self.image_profile.setPixmap(QtGui.QPixmap("../../../../Pictures/Wallpapers/wallhaven-g821oe.jpg"))
+        self.image_profile.setScaledContents(True)
+        self.image_profile.setObjectName("image_profile")
+        self.image_vcont.addWidget(self.image_profile)
+        self.verticalLayout_10.addLayout(self.image_vcont)
+        self.User_detail_label = QtWidgets.QLabel(self.middle_scroll_area_vcont)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.User_detail_label.sizePolicy().hasHeightForWidth())
+        self.User_detail_label.setSizePolicy(sizePolicy)
+        self.User_detail_label.setMinimumSize(QtCore.QSize(0, 0))
+        self.User_detail_label.setObjectName("User_detail_label")
+        self.verticalLayout_10.addWidget(self.User_detail_label)
+        self.form_gridCont = QtWidgets.QGridLayout()
+        self.form_gridCont.setObjectName("form_gridCont")
+        self.address = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.address.setObjectName("address")
+        self.form_gridCont.addWidget(self.address, 10, 0, 1, 3)
+        self.zipcode = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.zipcode.setObjectName("zipcode")
+        self.form_gridCont.addWidget(self.zipcode, 12, 0, 1, 1)
+        self.file_Selection_label = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.file_Selection_label.setObjectName("file_Selection_label")
+        self.form_gridCont.addWidget(self.file_Selection_label, 9, 0, 1, 3)
+        self.country = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.country.setObjectName("country")
+        self.form_gridCont.addWidget(self.country, 13, 0, 1, 3)
+        self.city = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.city.setObjectName("city")
+        self.form_gridCont.addWidget(self.city, 12, 1, 1, 1)
+        self.phone_no_opt = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.phone_no_opt.setObjectName("phone_no_opt")
+        self.form_gridCont.addWidget(self.phone_no_opt, 15, 0, 1, 3)
+        self.state = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.state.setObjectName("state")
+        self.form_gridCont.addWidget(self.state, 12, 2, 1, 1)
+        self.last_name = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.last_name.setObjectName("last_name")
+        self.form_gridCont.addWidget(self.last_name, 1, 2, 1, 1)
+        self.id_proof = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.id_proof.setObjectName("id_proof")
+        self.form_gridCont.addWidget(self.id_proof, 8, 0, 1, 3)
+        self.submit_btn = QtWidgets.QPushButton(self.middle_scroll_area_vcont)
+        self.submit_btn.setObjectName("submit_btn")
+        self.form_gridCont.addWidget(self.submit_btn, 17, 1, 1, 1)
+        self.middle_name = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.middle_name.setObjectName("middle_name")
+        self.form_gridCont.addWidget(self.middle_name, 1, 1, 1, 1)
+        self.address_opt = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.address_opt.setObjectName("address_opt")
+        self.form_gridCont.addWidget(self.address_opt, 11, 0, 1, 3)
+        self.phone_no = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.phone_no.setObjectName("phone_no")
+        self.form_gridCont.addWidget(self.phone_no, 14, 0, 1, 3)
+        self.first_name = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.first_name.setObjectName("first_name")
+        self.form_gridCont.addWidget(self.first_name, 1, 0, 1, 1)
+        self.email_id = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.email_id.sizePolicy().hasHeightForWidth())
+        self.email_id.setSizePolicy(sizePolicy)
+        self.email_id.setObjectName("email_id")
+        self.form_gridCont.addWidget(self.email_id, 4, 0, 1, 3)
+        self.browse_img = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.browse_img.setObjectName("browse_img")
+        self.form_gridCont.addWidget(self.browse_img, 0, 0, 1, 3)
+        self.tele_phone_no_opt = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.tele_phone_no_opt.setObjectName("tele_phone_no_opt")
+        self.form_gridCont.addWidget(self.tele_phone_no_opt, 16, 0, 1, 3)
+        self.dob = QtWidgets.QLineEdit(self.middle_scroll_area_vcont)
+        self.dob.setObjectName("dob")
+        self.form_gridCont.addWidget(self.dob, 6, 0, 1, 2)
+        self.dob_setter = QtWidgets.QDateEdit(self.middle_scroll_area_vcont)
+        self.dob_setter.setProperty("showGroupSeparator", False)
+        self.dob_setter.setCalendarPopup(True)
+        self.dob_setter.setTimeSpec(QtCore.Qt.LocalTime)
+        self.dob_setter.setObjectName("dob_setter")
+        self.form_gridCont.addWidget(self.dob_setter, 6, 2, 1, 1)
+        self.verticalLayout_10.addLayout(self.form_gridCont)
+        self.main_middle_scroll_area.setWidget(self.middle_scroll_area_vcont)
+        self.horizontalLayout.addWidget(self.main_middle_scroll_area)
+        #self.submit_btn.clicked.connect(btn_pressed)
+        submit_btn_var = self.submit_btn
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+
+        #self.personal_info_header.setText("king is back")
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        self.personal_info_header.setText(_translate("Form", "Registration Information Form"))
+        self.profile_pic_label.setText(_translate("Form", "Profile Picture:"))
+        self.User_detail_label.setText(_translate("Form", "Users Details:"))
+        self.address.setPlaceholderText(_translate("Form", "Address"))
+        self.zipcode.setPlaceholderText(_translate("Form", "Zipcode"))
+        self.file_Selection_label.setPlaceholderText(_translate("Form", "File Selection"))
+        self.country.setPlaceholderText(_translate("Form", "Country"))
+        self.city.setPlaceholderText(_translate("Form", "City"))
+        self.phone_no_opt.setPlaceholderText(_translate("Form", "Phone Number 2 (optional)"))
+        self.state.setPlaceholderText(_translate("Form", "State"))
+        self.last_name.setPlaceholderText(_translate("Form", "Last name"))
+        self.id_proof.setPlaceholderText(_translate("Form", "ID Proof"))
+        self.submit_btn.setText(_translate("Form", "Next"))
+        self.middle_name.setPlaceholderText(_translate("Form", "Middle name"))
+        self.address_opt.setPlaceholderText(_translate("Form", "Appartment, Area etc (optional)"))
+        self.phone_no.setPlaceholderText(_translate("Form", "Phone Number"))
+        self.first_name.setPlaceholderText(_translate("Form", "First name"))
+        self.email_id.setPlaceholderText(_translate("Form", "Email ID"))
+        self.browse_img.setPlaceholderText(_translate("Form", "Browse Image"))
+        self.tele_phone_no_opt.setPlaceholderText(_translate("Form", "Tele Number (optional)"))
+        self.dob.setPlaceholderText(_translate("Form", "Select Date Of Birth"))
+        self.dob_setter.setDisplayFormat(_translate("Form", "d/M/yy"))
+
