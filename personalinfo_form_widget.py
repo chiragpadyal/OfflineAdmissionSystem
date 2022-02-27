@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from socket import SOL_IP
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
@@ -24,12 +26,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.main_middle_scroll_area.sizePolicy().hasHeightForWidth())
         self.main_middle_scroll_area.setSizePolicy(sizePolicy)
         self.main_middle_scroll_area.setMinimumSize(QtCore.QSize(0, 100))
-        self.main_middle_scroll_area.setStyleSheet("QRadioButton{\n"
-"background : white;\n"
-"height: 30px;\n"
-"padding-left:3px;\n"
-"border: 1px solid lightgray\n"
-"}\n"
+        self.main_middle_scroll_area.setStyleSheet(
 "\n"
 "QComboBox{\n"
 "height: 30px;\n"
@@ -269,7 +266,7 @@ class Ui_Form(object):
         split_tup = os.path.splitext(fname[0])
         # Output filename to screen
         if type == "photo" and len(fname[0]) != 0 and split_tup[1] != '.pdf':
-            self.browse_img.setText(fname[0])
+            self.browse_img.setPlaceholderText(fname[0])
             img_path = open(fname[0], 'rb').read()
             pixmap = mask_image2(img_path , split_tup[1])
             self.image_profile.setPixmap(pixmap)
