@@ -2,11 +2,12 @@ import sys
 from PyQt5 import QtWidgets, QtCore , QtGui
 from PyQt5.QtWidgets import ( QMessageBox )
 from main_template import Ui_MainWindow as page2
-from Login import Ui_Login as page1
+from login_panel import Ui_Login as page1
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtCore import Qt
 #do not works with mainwindow
 import mysql.connector
+from PyQt5.QtWidgets import QDesktopWidget
 
 class Login(QtWidgets.QWidget,page1):
     switch_window = QtCore.pyqtSignal()
@@ -14,8 +15,14 @@ class Login(QtWidgets.QWidget,page1):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
+        self.center()
         self.pushButton.clicked.connect(lambda: self.switch_window.emit())
-
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+    
 
 class Newuser(QtWidgets.QMainWindow, page2):
     ThemeSet = 'White'
@@ -87,6 +94,8 @@ def syncNotice():
     return myresult
 
 app = QtWidgets.QApplication(sys.argv)
+
+
 if __name__ == "__main__":
     app.setStyle("Fusion")
     app.setStyleSheet(open("Stylesheets/pyqt5-light-theme.stylesheet").read())

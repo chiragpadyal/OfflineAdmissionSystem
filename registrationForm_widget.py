@@ -307,8 +307,8 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.main_middle_scroll_area)
 
         self.retranslateUi(Form)
+        self.pushButton.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(6))
         QtCore.QMetaObject.connectSlotsByName(Form)
-
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))

@@ -11,6 +11,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets 
 from personalinfo_form_widget import Ui_Form
 from registrationForm_widget import Ui_Form as Ui_Form2
+from payment_layout import Ui_Payment as Ui_Form3
 from dashboard_widget import Ui_Form as DashBoard
 from admin_panel_widget import Ui_Form as AdminPanel
 from notice_widget import Ui_Form as NoticePanel
@@ -305,6 +306,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_page6.addWidget(self.page6_holder)
 
 
+        self.page7 = QtWidgets.QWidget()
+        self.page7.setObjectName("page7")
+        self.horizontalLayout_page7 = QtWidgets.QHBoxLayout(self.page7)
+        self.horizontalLayout_page7.setObjectName("horizontalLayout_page7")
+        self.stackedWidget.addWidget(self.page7)
+        self.page7_holder = QtWidgets.QWidget(self.page7)
+        self.page7_holder.setObjectName("page7_holder")
+        self.horizontalLayout_page7.addWidget(self.page7_holder)
+
 
         self.horizontalLayout_2.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.form_place_hold_vcont)
@@ -363,6 +373,7 @@ class Ui_MainWindow(object):
         AdminPanel(self)#3
         NoticePanel(self)#4
         MessagePanel(self)#5
+        Ui_Form3(self)#6
         self.stackedWidget.setCurrentIndex(2)
 
     def retranslateUi(self, MainWindow):
