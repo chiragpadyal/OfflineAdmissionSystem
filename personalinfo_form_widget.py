@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from socket import SOL_IP
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
@@ -7,7 +5,7 @@ from datetime import date
 from roundimage import mask_image2
 
 import os
-
+import MysqlConn
 class Ui_Form(object):
 
     def __init__(self, Form): #step 2 init
@@ -253,7 +251,7 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.main_middle_scroll_area)
 
 
-        self.submit_btn.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(1))
+        self.submit_btn.clicked.connect(lambda: self.UploadForm(Obj))
         self.browse_profile_btn.clicked.connect(lambda: self.clicker("photo"))
         self.id_proof_drop_down.currentIndexChanged.connect(lambda: self.clicker("id"))
         self.dob_setter.editingFinished.connect(lambda: self.date_method())
@@ -262,11 +260,11 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def clicker(self, type):
-        fname = QFileDialog.getOpenFileName(None, "Open File", "/home/chirag/", " Document or Images (*.png *.jpg *.bmp *.pdf)"  )
+        fname = QFileDialog.getOpenFileName(None, "Open File", "", " Document or Images (*.png *.jpg *.bmp *.pdf)"  )
         split_tup = os.path.splitext(fname[0])
         # Output filename to screen
         if type == "photo" and len(fname[0]) != 0 and split_tup[1] != '.pdf':
-            self.browse_img.setPlaceholderText(fname[0])
+            self.browse_img.setText(fname[0])
             img_path = open(fname[0], 'rb').read()
             pixmap = mask_image2(img_path , split_tup[1])
             self.image_profile.setPixmap(pixmap)
@@ -314,3 +312,29 @@ class Ui_Form(object):
         self.male_radioButton.setText(_translate("Form", "Male"))
         self.female_radioButton.setText(_translate("Form", "Female"))
         self.gender_label.setText(_translate("Form", "Gender:"))
+
+    def UploadForm(self, Obj):
+        sql = "INSERT INTO `Admission Details` (`StudentID`, `ProfilePic`, `Firstname`, `Middlename`, `Lastname`, `DOB`, `IDProof`, `Gender`, `Address1`, `Address2`, `Zipcode`, `City`, `State`, `Country`, `EmailID`, `PhoneNo1`, `PhoneNo2`, `TelePhoneNo`) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) "
+        val = (
+            MysqlConn.RowCount() + 1,
+            self.browse_img.text(),
+            self.first_name.text(),
+            self.middle_name.text(),
+            self.last_name.text(),
+            self.dob.text(),
+            self.file_Selection_label.text(),
+            'male' if self.male_radioButton.isChecked() else 'female',
+            self.address.text(),
+            self.address_opt.text(),
+            self.zipcode.text(),
+            self.city.text(),
+            self.state.text(),
+            self.country.text(),
+            self.email_id.text(),
+            self.phone_no.text(),
+            self.phone_no_opt.text(),
+            self.tele_phone_no_opt.text()
+                )
+        
+        if MysqlConn.UploadForm(sql, val, False) == True:  Obj.stackedWidget.setCurrentIndex(1)
+        else: MysqlConn.AlertPop("Wrong Or Empty Data!")

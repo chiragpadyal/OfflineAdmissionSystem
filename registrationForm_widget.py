@@ -9,7 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QFileDialog 
+import MysqlConn
+import os
 
 class Ui_Form(object):
     def __init__(self, Form): #step 2 init
@@ -307,8 +309,14 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.main_middle_scroll_area)
 
         self.retranslateUi(Form)
-        self.pushButton.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(6))
+        self.pushButton.clicked.connect(lambda: self.UploadForm(Obj))
         QtCore.QMetaObject.connectSlotsByName(Form)
+
+        self.pushButton_2.clicked.connect(lambda: self.FileUpload('ssc'))
+        self.pushButton_3.clicked.connect(lambda: self.FileUpload('hsc'))
+        self.pushButton_4.clicked.connect(lambda: self.FileUpload('mhcet'))
+        self.pushButton_5.clicked.connect(lambda: self.FileUpload('jee'))
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -349,3 +357,42 @@ class Ui_Form(object):
         self.lineEdit_7.setPlaceholderText(_translate("Form", "-/10"))
         self.lineEdit_8.setPlaceholderText(_translate("Form", "No file Selected"))
         self.pushButton_4.setText(_translate("Form", "Select File"))
+
+    def FileUpload(self, type):
+        fname = QFileDialog.getOpenFileName(None, "Open File", "/home/chirag/", " Document or Images (*.png *.jpg *.bmp *.pdf)"  )
+        #split_tup = os.path.splitext(fname[0])
+        # Output filename to screen
+        if type == "ssc" and len(fname[0]) != 0:
+            self.lineEdit_8.setText(fname[0])
+        elif type == "hsc"  and len(fname[0]) != 0:
+            self.lineEdit_9.setText(fname[0])
+        elif type == "mhcet"  and len(fname[0]) != 0:
+            self.lineEdit_10.setText(fname[0])
+        elif type == "jee"  and len(fname[0]) != 0:
+            self.lineEdit_11.setText(fname[0])
+
+    def UploadForm(self, Obj):
+        sql = " INSERT INTO `Academic_Details` ( `Std_ID`, `Branch`, `Branch_Preferred`, `SSC`, `HSC`, `mhtcet`, `jee`, `ssc_date`, `hsc_date`, `mhcet_date`, `jee_date`,  `ssc_file`, `hsc_file`, `mhcet_file`, `jee_file`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)  "
+        val = (
+            MysqlConn.RowCount() + 1,
+            self.comboBox.currentText(),
+            self.comboBox_2.currentText(),
+
+            self.lineEdit_4.text(),
+            self.lineEdit_5.text(),
+            self.lineEdit_6.text(),
+            self.lineEdit_7.text(),
+
+            self.dob_setter_3.text(),
+            self.dateEdit.text(),
+            self.dateEdit_2.text(),
+            self.dateEdit_3.text(),
+
+            self.lineEdit_8.text(),
+            self.lineEdit_9.text(),
+            self.lineEdit_10.text(),
+            self.lineEdit_11.text(),
+                )
+        if MysqlConn.UploadForm(sql, val, False) == True: 
+            Obj.stackedWidget.setCurrentIndex(6)
+        else: MysqlConn.AlertPop("Wrong Or Empty Data!")

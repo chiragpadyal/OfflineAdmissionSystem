@@ -11,7 +11,7 @@
 from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
-
+import MysqlConn
 class Ui_Form(object):
 
     def __init__(self, Form): #step 2 init
@@ -256,6 +256,8 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.widget)
         self.pushButton.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(0))
         self.listWidget.currentItemChanged.connect(lambda: self.label_11.setText(str(self.listWidget.currentItem().text())))
+        self.data = MysqlConn.settings.value('userid')
+        self.label.setPixmap(QtGui.QPixmap(self.data[3]))
         self.retranslateUi(Form)
         self.listWidget.setCurrentRow(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -281,9 +283,9 @@ class Ui_Form(object):
  
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_2.setText(_translate("Form", "Name:"))
-        self.label_3.setText(_translate("Form", "John Doe"))
+        self.label_3.setText(_translate("Form", self.data[1] + " " + self.data[2]))
         self.label_4.setText(_translate("Form", "Staff ID:"))
-        self.label_7.setText(_translate("Form", "xxxxxxxxxx"))
+        self.label_7.setText(_translate("Form", str(self.data[7])))
         self.label_5.setText(_translate("Form", "Today: 3"))
         self.label_6.setText(_translate("Form", "This Year: 30"))
         self.label_9.setText(_translate("Form", "Admission Portal"))

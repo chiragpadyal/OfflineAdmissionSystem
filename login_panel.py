@@ -9,9 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import MysqlConn
 
 class Ui_Login(object):
+    LoginSignal = QtCore.pyqtSignal()
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.setMinimumSize(QtCore.QSize(400,400))
@@ -52,6 +53,7 @@ class Ui_Login(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         self.lineEdit = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -82,7 +84,7 @@ class Ui_Login(object):
         self.horizontalLayout_3.addWidget(self.pushButton_2)
         self.verticalLayout.addWidget(self.widget_3)
         self.verticalLayout_2.addLayout(self.verticalLayout)
-
+        self.pushButton.clicked.connect(lambda: self.LoginCheck())
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -94,3 +96,21 @@ class Ui_Login(object):
         self.label_2.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:16pt;\">Password   :</span></p></body></html>"))
         self.pushButton.setText(_translate("Dialog", "Submit"))
         self.pushButton_2.setText(_translate("Dialog", "Exit"))
+
+
+
+
+    def LoginCheck(self):
+        username = self.lineEdit_2.text()
+        password = self.lineEdit.text()
+        mydb = MysqlConn.mydb
+        mycursor = mydb.cursor()
+        query = "SELECT * FROM `Login_details` WHERE `Username`= %s  and `Password` = %s "
+        val = (username, password)
+        mycursor.execute( query, val )
+        myresult = mycursor.fetchall()
+        if len( myresult ):
+            MysqlConn.settings.setValue('userid', myresult[0])
+            self.LoginSignal.emit()
+        else:
+            MysqlConn.AlertPop("Wrong Password!")

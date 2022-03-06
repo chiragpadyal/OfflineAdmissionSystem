@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import MysqlConn
 
 class Ui_Payment(object):
     def __init__(self, Form): #step 2 init
@@ -184,7 +185,7 @@ class Ui_Payment(object):
         self.verticalLayout.addWidget(self.widget_2, 0, QtCore.Qt.AlignHCenter)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem2)
-
+        self.pushButton.clicked.connect(lambda: self.insertSQL(Obj))
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -210,3 +211,28 @@ class Ui_Payment(object):
         self.It_button.setText(_translate("Form", "I.T Engineering"))
         self.Comps_but.setText(_translate("Form", "Computer Engineering"))
         self.pushButton.setText(_translate("Form", "Print"))
+
+    def checkAcademic(self):
+        if self.Comps_3.isChecked()    : return self.Comps_3.text()
+        if self.Comps_6.isChecked() : return self.Comps_6.text()
+        if self.Comps_4.isChecked() : return self.Comps_4.text()
+        if self.It_button.isChecked() : return self.It_button.text()
+        if self.Comps_but.isChecked() : return self.Comps_but.text()
+
+    def checkPayment(self):
+        if self.Comps_but_3.isChecked()    : return self.Comps_but_3.text()
+        if self.Comps_but_2.isChecked() : return self.Comps_but_2.text()
+        if self.Comps_but_4.isChecked() : return self.Comps_but_4.text()
+        
+    def insertSQL(self, Obj):
+        sql = " INSERT INTO `Branch_details` (`Std_ID`, `Branch`, `PaymentMethod`, `AcademicYear`, `Course`) VALUES (%s, %s, %s, %s, %s)  "
+        val = (
+            MysqlConn.RowCount() + 1,
+            self.checkAcademic(),
+            self.checkPayment(),
+            self.comboBox.currentText(),
+            self.comboBox_2.currentText()
+             )
+        if MysqlConn.UploadForm(sql, val, True) == True: 
+            Obj.stackedWidget.setCurrentIndex(2)
+        else: MysqlConn.AlertPop("Wrong Or Empty Data!")

@@ -16,11 +16,12 @@ from dashboard_widget import Ui_Form as DashBoard
 from admin_panel_widget import Ui_Form as AdminPanel
 from notice_widget import Ui_Form as NoticePanel
 from message import Ui_MessageBox as MessagePanel
-
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QFileDialog 
-
+import MysqlConn
 class Ui_MainWindow(object):
     signal_notice = QtCore.pyqtSignal()
+    settings = QSettings("MySoft", "Star Runner")
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1221, 555)
@@ -359,6 +360,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # self.settings.setValue('context', 'king')
 
         self.go_to_dash_and_load_pages()
         self.Dashboard_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
@@ -366,6 +368,19 @@ class Ui_MainWindow(object):
         self.Admin_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.help1_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
 
+        self.logout_btn.clicked.connect(lambda: self.changeForm())
+    def changeForm(self):
+        a = self.stackedWidget.currentIndex()
+        b = [0,1,6]
+        if a in b: 
+            index = b.index(a)
+            self.stackedWidget.setCurrentIndex(b[(index - 1)%3])
+            MysqlConn.Backward()
+            print(
+                MysqlConn.sql_arr," -- ",
+                MysqlConn.val_arr, "  -- ",
+                MysqlConn.iterator
+            )
     def go_to_dash_and_load_pages(self):
         Ui_Form(self)#0
         Ui_Form2(self)#1
