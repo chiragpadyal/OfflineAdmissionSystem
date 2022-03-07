@@ -41,6 +41,17 @@ class Ui_Form(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.horizontalLayout_2.addWidget(self.comboBox)
+
+
+
+        self.RefreshBtn = QtWidgets.QPushButton(self.widget)
+        self.RefreshBtn.setObjectName("RefreshBtn")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icons/reload.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.RefreshBtn.setIcon(icon)
+
+        self.horizontalLayout_2.addWidget(self.RefreshBtn)
+
         self.verticalLayout.addWidget(self.widget)
         self.widget_2 = QtWidgets.QWidget(Form)
         self.widget_2.setObjectName("widget_2")
@@ -120,6 +131,7 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
         self.TableMapper()
         self.pushButton.clicked.connect(lambda: self.tableWidget.removeRow(0))
+        self.RefreshBtn.clicked.connect(lambda: self.TableMapper())
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -193,15 +205,16 @@ class Ui_Form(object):
         item.setText(_translate("Form", "MH-CET Date"))
         item = self.tableWidget.horizontalHeaderItem(28)
         item.setText(_translate("Form", "Jee Date"))
-
+        self.RefreshBtn.setText(_translate("Form", "Refresh", ))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
 
-
     def TableMapper(self):
         #combine
+        while (self.tableWidget.rowCount() > 0):
+            self.tableWidget.removeRow(0)
         mydb = MysqlConn.mydb
         mycursor = mydb.cursor()
         mycursor.execute("SELECT  a.`ProfilePic`, a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`Address1`, a.`City`, a.`State`, a.`Country`, a.`Zipcode`, a.`PhoneNo1`, a.`PhoneNo2` , b.SSC, b.HSC, b.mhtcet, b.jee, b.ssc_file, b.hsc_file, b.mhcet_file, b.jee_file, b.ssc_date, b.hsc_date, b.mhcet_date, b.jee_date FROM `Admission Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID ")

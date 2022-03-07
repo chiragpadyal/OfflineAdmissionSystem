@@ -5,8 +5,7 @@ from main_template import Ui_MainWindow as page2
 from login_panel import Ui_Login as page1
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtCore import Qt
-#do not works with mainwindow
-import mysql.connector
+import MysqlConn
 from PyQt5.QtWidgets import QDesktopWidget
 
 class Login(QtWidgets.QWidget,page1):
@@ -16,7 +15,7 @@ class Login(QtWidgets.QWidget,page1):
         QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
         self.center()
-        self.pushButton.clicked.connect(lambda: self.switch_window.emit())
+        self.LoginSignal.connect(lambda: self.switch_window.emit())
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
@@ -71,34 +70,26 @@ class Controller:
 
 def ToggleTheme(ThemeSet):
     if ThemeSet == "White":
-        app.setStyleSheet(open("Stylesheets/pyqt5-dark-theme.stylesheet").read())
+        app.setStyleSheet(open("Theme/pyqt5-dark-theme.stylesheet").read())
         return 'Dark'
    
     elif ThemeSet == "Dark":
-        app.setStyleSheet(open("Stylesheets/pyqt5-light-theme.stylesheet").read())
+        app.setStyleSheet(open("Theme/pyqt5-light-theme.stylesheet").read())
         return 'White'
 
 def syncNotice():
-    mydb = mysql.connector.connect(
-            host="localhost",
-            user="Chiragsp",
-            password="admin",
-            database="Inhouse_Admission_System"
-    )
-
+    mydb = MysqlConn.mydb
     mycursor = mydb.cursor()
-
     mycursor.execute("SELECT `Title`,`Prioirty`,`Body` FROM `Notice_Board`")
-
     myresult = mycursor.fetchall()
     return myresult
-
+    
 app = QtWidgets.QApplication(sys.argv)
 
 
 if __name__ == "__main__":
     app.setStyle("Fusion")
-    app.setStyleSheet(open("Stylesheets/pyqt5-light-theme.stylesheet").read())
+    app.setStyleSheet(open("Theme/pyqt5-light-theme.stylesheet").read())
     controller = Controller()
     controller.show_login_page()
     sys.exit(app.exec_())

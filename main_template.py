@@ -368,19 +368,19 @@ class Ui_MainWindow(object):
         self.Admin_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.help1_btn.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
 
-        self.logout_btn.clicked.connect(lambda: self.changeForm())
-    def changeForm(self):
-        a = self.stackedWidget.currentIndex()
-        b = [0,1,6]
-        if a in b: 
-            index = b.index(a)
-            self.stackedWidget.setCurrentIndex(b[(index - 1)%3])
-            MysqlConn.Backward()
-            print(
-                MysqlConn.sql_arr," -- ",
-                MysqlConn.val_arr, "  -- ",
-                MysqlConn.iterator
-            )
+    #     self.logout_btn.clicked.connect(lambda: self.signal_notice.emit())
+    # def changeForm(self):
+    #     a = self.stackedWidget.currentIndex()
+    #     b = [0,1,6]
+    #     if a in b: 
+    #         index = b.index(a)
+    #         self.stackedWidget.setCurrentIndex(b[(index - 1)%3])
+    #         MysqlConn.Backward()
+    #         print(
+    #             MysqlConn.sql_arr," -- ",
+    #             MysqlConn.val_arr, "  -- ",
+    #             MysqlConn.iterator
+    #         )
     def go_to_dash_and_load_pages(self):
         Ui_Form(self)#0
         Ui_Form2(self)#1

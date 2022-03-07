@@ -1,0 +1,5 @@
+Python 3.9.7
+
+pip install PyQt5
+pip install mysql-connector-python
+

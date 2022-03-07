@@ -184,8 +184,15 @@ class Ui_Payment(object):
         self.verticalLayout_3.addWidget(self.pushButton)
         self.verticalLayout.addWidget(self.widget_2, 0, QtCore.Qt.AlignHCenter)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        
+        self.BackBtn = QtWidgets.QPushButton(self.widget_2)
+        self.BackBtn.setObjectName("BackBtn")
+
+        self.verticalLayout_3.addWidget(self.BackBtn)
+        
         self.verticalLayout.addItem(spacerItem2)
         self.pushButton.clicked.connect(lambda: self.insertSQL(Obj))
+        self.BackBtn.clicked.connect(lambda: MysqlConn.Backward(Obj, Obj.stackedWidget.currentIndex()) )
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -211,6 +218,7 @@ class Ui_Payment(object):
         self.It_button.setText(_translate("Form", "I.T Engineering"))
         self.Comps_but.setText(_translate("Form", "Computer Engineering"))
         self.pushButton.setText(_translate("Form", "Print"))
+        self.BackBtn.setText(_translate("Payment", "Back"))
 
     def checkAcademic(self):
         if self.Comps_3.isChecked()    : return self.Comps_3.text()

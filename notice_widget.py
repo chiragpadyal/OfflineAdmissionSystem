@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import mysql.connector
+#import mysql.connector
+import MysqlConn
 class Ui_Form(object):
     def __init__(self, Form): #step 2 init
         self.setupUi( Form )
@@ -84,6 +85,8 @@ class Ui_Form(object):
         self.notice_publish.clicked.connect(lambda: self.insertMysql(Obj))
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        # self.settings = QtCore.QSettings("MySoft", "Star Runner")
+        # print(self.settings.value('context'))
 
     # def publish(self, Obj):
     #     Obj.signal_notice.emit()
@@ -100,25 +103,14 @@ class Ui_Form(object):
         self.body_label.setText(_translate("Form", "Body:"))
         self.notice_publish.setText(_translate("Form", "Publish"))
 
-
-    def insertMysql(self ,Obj):
-        body = self.body_text_input.toPlainText()
-        title = self.lineEdit.text()
-        priority = self.piority_combobox.currentText()
-        mydb = mysql.connector.connect(
-            host="localhost",
-            user="Chiragsp",
-            password="admin",
-            database="Inhouse_Admission_System"
-        )
-
-        mycursor = mydb.cursor()
-
+    def insertMysql(self, Obj):
         sql = "INSERT INTO `Notice_Board` (`Title`, `Prioirty`, `Body`) VALUES ( %s, %s, %s);"
-        val = (title, priority, body)
-        mycursor.execute(sql, val)
+        val = (
+            self.lineEdit.text(),
+            self.piority_combobox.currentText(),
+            self.body_text_input.toPlainText()
+            )
+        if MysqlConn.UploadForm(sql, val, True) == True: 
+            Obj.signal_notice.emit()
 
-        mydb.commit()
-        Obj.signal_notice.emit()
-
-        print(mycursor.rowcount, "record inserted.")
+        else: MysqlConn.AlertPop("Wrong Or Empty Data!")

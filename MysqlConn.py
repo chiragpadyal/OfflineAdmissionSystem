@@ -4,14 +4,33 @@ import mysql.connector
 from mysql.connector import Error
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QMessageBox
-from numpy import iterable
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="Chiragsp",
-    password="admin",
-    database="Inhouse_Admission_System"
-)
+
+"""
+try 2 database 
+"""
+try:
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="admin",
+        password="",
+        database="Inhouse_Admission_System"
+    )
+except Error as err:
+    print(err)
+    try:
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="Chiragsp",
+            password="admin",
+            database="Inhouse_Admission_System"
+        )
+    except Error as err2:
+        print(err2)
+    else:
+        print("Success 2nd")
+else:
+    print("Success 1st")
 
 mycursor = mydb.cursor()
 settings = QSettings("MySoft", "Star Runner")
@@ -52,17 +71,19 @@ def UploadForm( sql, val, a):
             mydb.commit()
             sql_arr.clear()
             val_arr.clear()
-            # print(mycursor.rowcount ,'!=' ,prev_count)
-            # if mycursor.rowcount != prev_count: return True
-            # else: return False 
             return True
     return True
 
-def Backward():
+def Backward(Obj , x):
     global iterator
     iterator -= 1
     sql_arr.pop()
     val_arr.pop()
+    a = x
+    b = [0,1,6]
+    if a in b:
+        index = b.index(a)
+        Obj.stackedWidget.setCurrentIndex(b[(index - 1)%3])
 
 def RowCount():
     mycursor = mydb.cursor()
@@ -71,19 +92,3 @@ def RowCount():
     mycursor.fetchall()
     return mycursor.rowcount
 
-
-
-
-
-# def UploadForm( sql, val, a):
-#     prev_count = mycursor.rowcount
-#     try:
-#         mycursor.execute(sql, val)
-#     except:
-#         print("Mysql Error.")
-#     if a == True:
-#         mydb.commit()
-#         print(mycursor.rowcount ,'!=' ,prev_count)
-#         if mycursor.rowcount != prev_count: return True
-#         else: return False
-#     return True

@@ -36,39 +36,13 @@ class Ui_MessageBox(object):
         self.messageTextBox = QtWidgets.QTextEdit(self.dockWidgetContents)
         self.messageTextBox.setObjectName("messageTextBox")
         self.verticalLayout_2.addWidget(self.messageTextBox)
-        self.chat_widget = QtWidgets.QWidget(self.dockWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.chat_widget.sizePolicy().hasHeightForWidth())
-        self.chat_widget.setSizePolicy(sizePolicy)
-        self.chat_widget.setObjectName("chat_widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.chat_widget)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.chat_input = QtWidgets.QLineEdit(self.chat_widget)
-        self.chat_input.setObjectName("chat_input")
-        self.horizontalLayout.addWidget(self.chat_input)
-        self.chat_submit = QtWidgets.QPushButton(self.chat_widget)
-        self.chat_submit.setObjectName("chat_submit")
-        self.horizontalLayout.addWidget(self.chat_submit)
-        self.verticalLayout_2.addWidget(self.chat_widget)
         self.MessageBoxFloat.setWidget(self.dockWidgetContents)
         self.verticalLayout.addWidget(self.MessageBoxFloat)
 
         self.retranslateUi(MessageBox)
-        
-
-        self.messageTextBox.setTextBackgroundColor(QColor('#66FFE6'))
-        self.messageTextBox.append("textFormatted")
-
-        self.messageTextBox.setTextBackgroundColor(QColor('#66B3FF'))
-        self.messageTextBox.append("textFormatted")
-
-        self.messageTextBox.setTextBackgroundColor(QColor('#66FFE6'))
-        self.messageTextBox.append("textFormatted")
-
-        self.messageTextBox.setTextBackgroundColor(QColor('#66B3FF'))
-        self.chat_submit.clicked.connect(lambda: self.messageTextBox.append(self.chat_input.text()))
 
         self.MessageBoxFloat.visibilityChanged.connect(lambda: print(True))
         QtCore.QMetaObject.connectSlotsByName(MessageBox)
@@ -76,19 +50,32 @@ class Ui_MessageBox(object):
     def retranslateUi(self, MessageBox):
         _translate = QtCore.QCoreApplication.translate
         MessageBox.setWindowTitle(_translate("MessageBox", "Form"))
-        self.messageTextBox.setHtml(_translate("MessageBox", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.messageTextBox.setHtml(_translate("MessageBox", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Fira Sans Semi-Light\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:10px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.chat_submit.setText(_translate("MessageBox", "Submit"))
+"</style></head><body style=\" font-family:'Fira Sans Semi-Light'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 
+
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">! Help Center !</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-siz"
+                        "e:12pt;\">HOD : +91 9999999999</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Head: +91 5555555555</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Tech Department : +91 888888888</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; ma"
+                        "rgin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">IT Department: +91 444444444</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.messageTextBox.setReadOnly(True)
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_MessageBox()
-    ui.setupUi(Form)
+    Ui_MessageBox(Form)
     Form.show()
     
     sys.exit(app.exec_())

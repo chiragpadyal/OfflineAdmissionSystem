@@ -289,6 +289,14 @@ class Ui_Form(object):
         self.form_gridCont_3.addWidget(self.pushButton_4, 15, 2, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.form_gridCont_3.addItem(spacerItem2, 2, 0, 1, 1)
+
+
+        self.BackBtn = QtWidgets.QPushButton(self.middle_scroll_area_vcont_3)
+        self.BackBtn.setObjectName("BackBtn")
+
+        self.form_gridCont_3.addWidget(self.BackBtn, 19, 1, 1, 1)
+
+
         self.verticalLayout.addLayout(self.form_gridCont_3)
         self.image_profile_3 = QtWidgets.QLabel(self.middle_scroll_area_vcont_3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -316,7 +324,7 @@ class Ui_Form(object):
         self.pushButton_3.clicked.connect(lambda: self.FileUpload('hsc'))
         self.pushButton_4.clicked.connect(lambda: self.FileUpload('mhcet'))
         self.pushButton_5.clicked.connect(lambda: self.FileUpload('jee'))
-
+        self.BackBtn.clicked.connect(lambda: MysqlConn.Backward(Obj, Obj.stackedWidget.currentIndex()) )
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -357,9 +365,10 @@ class Ui_Form(object):
         self.lineEdit_7.setPlaceholderText(_translate("Form", "-/10"))
         self.lineEdit_8.setPlaceholderText(_translate("Form", "No file Selected"))
         self.pushButton_4.setText(_translate("Form", "Select File"))
+        self.BackBtn.setText(_translate("Form", "Back"))
 
     def FileUpload(self, type):
-        fname = QFileDialog.getOpenFileName(None, "Open File", "/home/chirag/", " Document or Images (*.png *.jpg *.bmp *.pdf)"  )
+        fname = QFileDialog.getOpenFileName(None, "Open File", "./", " Document or Images (*.png *.jpg *.bmp *.pdf)"  )
         #split_tup = os.path.splitext(fname[0])
         # Output filename to screen
         if type == "ssc" and len(fname[0]) != 0:
