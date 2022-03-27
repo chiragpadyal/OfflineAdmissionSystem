@@ -4,26 +4,28 @@ import mysql.connector
 from mysql.connector import Error
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QMessageBox
-
+import mail_send
 
 """
 try 2 database 
 """
 try:
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="admin",
-        password="",
-        database="Inhouse_Admission_System"
+        host="127.0.0.1",
+        user="root",
+        password="root",
+        database="Inhouse_Admission_System",
+        port=3307
     )
 except Error as err:
     print(err)
     try:
         mydb = mysql.connector.connect(
             host="localhost",
-            user="Chiragsp",
+            user="chiragsp",
             password="admin",
-            database="Inhouse_Admission_System"
+            database="Inhouse_Admission_System",
+            port=3306
         )
     except Error as err2:
         print(err2)
@@ -46,37 +48,35 @@ def AlertPop( text):
 # arr = []
 sql_arr = []
 val_arr = []
-iterator = 0
+
 def UploadForm( sql, val, a):  
-    global iterator
-    iterator += 1
+
     sql_arr.append(sql)
     val_arr.append(val)
-    print(
-        sql_arr," -- ",
-        val_arr, "  -- ",
-        iterator
-        )
+    #print(
+    #    sql_arr," -- ",
+    #    val_arr, "  -- ",
+    #    )
+
     if a == True:
+        print(val_arr[0][14])
         prev_count = mycursor.rowcount
         try:
             for a in range(0,len(sql_arr)):
                 mycursor.execute(sql_arr[a], val_arr[a])
+            mydb.commit()
         except Error as err:
             print("Mysql Error.: " , err)
-            sql_arr.pop()
-            val_arr.pop()
             return False 
-        else :    
-            mydb.commit()
+        else :
+            mail_send.message(val_arr[0][14], "password")
             sql_arr.clear()
             val_arr.clear()
             return True
     return True
 
 def Backward(Obj , x):
-    global iterator
-    iterator -= 1
+
     sql_arr.pop()
     val_arr.pop()
     a = x

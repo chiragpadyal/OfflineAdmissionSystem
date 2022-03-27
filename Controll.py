@@ -1,8 +1,8 @@
 import sys
 from PyQt5 import QtWidgets, QtCore , QtGui
 from PyQt5.QtWidgets import ( QMessageBox )
-from main_template import Ui_MainWindow as page2
-from login_panel import Ui_Login as page1
+from components.main_template import Ui_MainWindow as page2
+from components.login_panel import Ui_Login as page1
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtCore import Qt
 import MysqlConn
