@@ -4,6 +4,8 @@ from mysql.connector import Error
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QMessageBox
 from MysqlConn.mail_send import message
+from decouple import config
+
 try:
     mydb = mysql.connector.connect(
         host="127.0.0.1",
@@ -52,7 +54,7 @@ def UploadForm( sql, val, a):
             print("Mysql Error.: " , err)
             return False 
         else :
-            message(val_arr[0][14], "password")
+            message(val_arr[0][14], str(config('KEY')))
             sql_arr.clear()
             val_arr.clear()
             return True

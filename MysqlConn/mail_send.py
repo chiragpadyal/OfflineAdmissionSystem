@@ -1,6 +1,8 @@
 import smtplib #importing the module
 from smtplib import SMTPResponseException 
 from getpass import getpass
+from decouple import config
+
 def message(receiver_add , password):
 	
 	sender_add='freakstar03@gmail.com' #storing the sender's mail id
@@ -25,6 +27,7 @@ def message(receiver_add , password):
 	finally:
 		smtp_server.quit()#terminating the server
 
-# receiver_add='20104034.chirag.padyal@gmail.com' #storing the receiver's mail id
-# password = getpass()
+# receiver_add = '20104034.chirag.padyal@gmail.com' #storing the receiver's mail id
+# password = str(config('KEY'))
 # message(receiver_add, password)
+
