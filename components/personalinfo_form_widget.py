@@ -1,4 +1,4 @@
-from socket import SOL_IP
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
 from datetime import date

@@ -17,8 +17,8 @@ from components.admin_panel_widget import Ui_Form as AdminPanel
 from components.notice_widget import Ui_Form as NoticePanel
 from components.message import Ui_MessageBox as MessagePanel
 from PyQt5.QtCore import QSettings
-from PyQt5.QtWidgets import QFileDialog 
-import MysqlConn
+
+
 class Ui_MainWindow(object):
     signal_notice = QtCore.pyqtSignal()
     settings = QSettings("MySoft", "Star Runner")

@@ -1,4 +1,7 @@
 __pycache__/
+components/__pycache__
 all_ui/
 Bin/
-env/
+venv/
+.vscode/
+DatabaseBackup/

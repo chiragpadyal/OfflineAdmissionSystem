@@ -1,0 +1,5 @@
+
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_DATABASE Inhouse_Admission_System
+EXPOSE 3306
