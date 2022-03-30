@@ -63,6 +63,13 @@ To Restore Default DB
   make mysql-restore
 ```
 
+## Env Key Setup
+
+App Key of gmail setup for mail-send.py
+
+```bash
+  echo "KEY=keyValue" > .env
+```
 
 
 
