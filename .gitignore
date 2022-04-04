@@ -6,3 +6,5 @@ venv/
 .vscode/
 DatabaseBackup/
 .env
+CMakeLists.txt
+build/

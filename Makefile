@@ -21,14 +21,14 @@ docker: MysqlDocker/docker-compose.yml
 	echo "wait 2 minutes"
 
 docker-stop: 
-	docker container stop mysql_container 
+	docker container stop mysql_PythonMiniProject 
  
 docker-start: 
-	docker container start mysql_container 
+	docker container start mysql_PythonMiniProject 
 
 docker-remove:
-	docker container stop mysql_container
-	docker container rm -v mysql_container
+	docker container stop mysql_PythonMiniProject
+	docker container rm -v mysql_PythonMiniProject
 
 mysql-dump: MysqlDocker/init/dataBaseDump.sql
 	rm -r MysqlDocker/init/dataBaseDump.sql
