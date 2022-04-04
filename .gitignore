@@ -8,3 +8,4 @@ DatabaseBackup/
 .env
 CMakeLists.txt
 build/
+.prettierrc

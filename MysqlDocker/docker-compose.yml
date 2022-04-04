@@ -1,15 +1,15 @@
-version: '3.6'
+version: "3"
 
-services: 
+services:
         db:
-                image: mysql:5.7
-                environment:
-                        MYSQL_ROOT_PASSWORD: root
-                        MYSQL_DATABASE: Inhouse_Admission_System
+                image: mysql
                 container_name: mysql_PythonMiniProject
                 command: --default-authentication-plugin=mysql_native_password
                 restart: always
-                volumes: 
+                environment:
+                        MYSQL_ROOT_PASSWORD: root
+                        MYSQL_DATABASE: Inhouse_Admission_System
+                volumes:
                         - ./init:/docker-entrypoint-initdb.d
-                ports: 
+                ports:
                         - 3307:3306
