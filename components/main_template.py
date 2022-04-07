@@ -16,6 +16,7 @@ from components.dashboard_widget import Ui_Form as DashBoard
 from components.admin_panel_widget import Ui_Form as AdminPanel
 from components.notice_widget import Ui_Form as NoticePanel
 from components.message import Ui_MessageBox as MessagePanel
+from components.short_list import Ui_Form as short_list
 from PyQt5.QtCore import QSettings
 
 
@@ -316,6 +317,14 @@ class Ui_MainWindow(object):
         self.page7_holder.setObjectName("page7_holder")
         self.horizontalLayout_page7.addWidget(self.page7_holder)
 
+        self.page8 = QtWidgets.QWidget()
+        self.page8.setObjectName("page8")
+        self.horizontalLayout_page8 = QtWidgets.QHBoxLayout(self.page8)
+        self.horizontalLayout_page8.setObjectName("horizontalLayout_page8")
+        self.stackedWidget.addWidget(self.page8)
+        self.page8_holder = QtWidgets.QWidget(self.page8)
+        self.page8_holder.setObjectName("page8_holder")
+        self.horizontalLayout_page8.addWidget(self.page8_holder)
 
         self.horizontalLayout_2.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.form_place_hold_vcont)
@@ -389,6 +398,7 @@ class Ui_MainWindow(object):
         NoticePanel(self)#4
         MessagePanel(self)#5
         Ui_Form3(self)#6
+        short_list(self)#7
         self.stackedWidget.setCurrentIndex(2)
 
     def retranslateUi(self, MainWindow):

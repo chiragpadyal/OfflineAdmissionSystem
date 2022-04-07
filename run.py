@@ -1,5 +1,4 @@
 """ This is Controll App """
-import os
 import sys
 from PyQt5 import QtWidgets, QtCore , QtGui
 from PyQt5.QtWidgets import QDesktopWidget

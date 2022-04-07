@@ -72,7 +72,7 @@ def Backward(Obj , x):
 
 def RowCount():
     mycursor = mydb.cursor()
-    sql = "SELECT `StudentID` FROM `Admission Details`"
+    sql = "SELECT `StudentID` FROM `Admission_Details`"
     mycursor.execute(sql)
     mycursor.fetchall()
     return mycursor.rowcount

@@ -75,7 +75,6 @@ class Ui_Form(object):
         self.personal_info_header_3.setMinimumSize(QtCore.QSize(0, 20))
         self.personal_info_header_3.setMaximumSize(QtCore.QSize(16777215, 20))
         self.personal_info_header_3.setStyleSheet("*{font-family:  \"DejaVu Math TeX Gyre\";\n"
-"    font-size:20px\n"
 "}")
         self.personal_info_header_3.setObjectName("personal_info_header_3")
         self.verticalLayout_10.addWidget(self.personal_info_header_3, 0, QtCore.Qt.AlignHCenter)

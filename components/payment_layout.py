@@ -214,9 +214,8 @@ class Ui_Payment(object):
         self.Comps_but_4.setText(_translate("Form", "Cash "))
         self.Comps_3.setText(_translate("Form", "Civil Engineering"))
         self.Comps_6.setText(_translate("Form", "Mechanical Engineering"))
-        self.Comps_4.setText(_translate("Form", "Extc Engineering"))
-        self.It_button.setText(_translate("Form", "I.T Engineering"))
-        self.Comps_but.setText(_translate("Form", "Computer Engineering"))
+        self.It_button.setText(_translate("Form", "Information Technology"))
+        self.Comps_but.setText(_translate("Form", "Computer Science"))
         self.pushButton.setText(_translate("Form", "Print"))
         self.BackBtn.setText(_translate("Payment", "Back"))
 

@@ -104,7 +104,6 @@ class Ui_Form(object):
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.personal_info_header = QtWidgets.QLabel(self.middle_scroll_area_vcont)
         self.personal_info_header.setStyleSheet("*{font-family:  \"DejaVu Math TeX Gyre\";\n"
-"    font-size:20px\n"
 "}")
         self.personal_info_header.setObjectName("personal_info_header")
         self.verticalLayout_10.addWidget(self.personal_info_header)
@@ -314,7 +313,7 @@ class Ui_Form(object):
         self.gender_label.setText(_translate("Form", "Gender:"))
 
     def UploadForm(self, Obj):
-        sql = "INSERT INTO `Admission Details` (`StudentID`, `ProfilePic`, `Firstname`, `Middlename`, `Lastname`, `DOB`, `IDProof`, `Gender`, `Address1`, `Address2`, `Zipcode`, `City`, `State`, `Country`, `EmailID`, `PhoneNo1`, `PhoneNo2`, `TelePhoneNo`) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) "
+        sql = "INSERT INTO `Admission_Details` (`StudentID`, `ProfilePic`, `Firstname`, `Middlename`, `Lastname`, `DOB`, `IDProof`, `Gender`, `Address1`, `Address2`, `Zipcode`, `City`, `State`, `Country`, `EmailID`, `PhoneNo1`, `PhoneNo2`, `TelePhoneNo`) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) "
         val = (
             MysqlConn.RowCount() + 1,
             self.browse_img.text(),

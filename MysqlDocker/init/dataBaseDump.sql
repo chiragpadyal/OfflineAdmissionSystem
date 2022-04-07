@@ -39,7 +39,7 @@ CREATE TABLE `Academic_Details` (
   `mhcet_file` varchar(100) NOT NULL,
   `jee_file` varchar(100) NOT NULL,
   KEY `Std_ID` (`Std_ID`),
-  CONSTRAINT `Academic_Details_ibfk_1` FOREIGN KEY (`Std_ID`) REFERENCES `Admission Details` (`StudentID`)
+  CONSTRAINT `Academic_Details_ibfk_1` FOREIGN KEY (`Std_ID`) REFERENCES `Admission_Details` (`StudentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,13 +54,13 @@ INSERT INTO `Academic_Details` VALUES (1,'IT','----',455,455,5455,455,'1/1/00','
 UNLOCK TABLES;
 
 --
--- Table structure for table `Admission Details`
+-- Table structure for table `Admission_Details`
 --
 
-DROP TABLE IF EXISTS `Admission Details`;
+DROP TABLE IF EXISTS `Admission_Details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Admission Details` (
+CREATE TABLE `Admission_Details` (
   `StudentID` int NOT NULL AUTO_INCREMENT,
   `ProfilePic` varchar(100) NOT NULL,
   `Firstname` varchar(100) NOT NULL,
@@ -84,13 +84,13 @@ CREATE TABLE `Admission Details` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Admission Details`
+-- Dumping data for table `Admission_Details`
 --
 
-LOCK TABLES `Admission Details` WRITE;
-/*!40000 ALTER TABLE `Admission Details` DISABLE KEYS */;
-INSERT INTO `Admission Details` VALUES (1,'/home/chirag/Pictures/Screenshot from 2021-11-08 19-29-05.png','hero','zer','daw','01 January, 2000','/home/chirag/Pictures/Screenshot from 2021-11-11 18-02-15.png','female','dawd','daw','54','awd','wadw','daw','daw',54,48,48),(2,'/home/chirag/Pictures/Screenshot from 2021-11-08 19-29-05.png','Hero','go','is','01 January, 2000','/home/chirag/Pictures/Screenshot from 2021-11-11 18-01-54.png','male','daw','daw','123','fish','goat','yeah','hero.com',123456,123745,458485),(3,'','','','','','','male','','','548','','','','',548,4585,45);
-/*!40000 ALTER TABLE `Admission Details` ENABLE KEYS */;
+LOCK TABLES `Admission_Details` WRITE;
+/*!40000 ALTER TABLE `Admission_Details` DISABLE KEYS */;
+INSERT INTO `Admission_Details` VALUES (1,'/home/chirag/Pictures/Screenshot from 2021-11-08 19-29-05.png','hero','zer','daw','01 January, 2000','/home/chirag/Pictures/Screenshot from 2021-11-11 18-02-15.png','female','dawd','daw','54','awd','wadw','daw','daw',54,48,48),(2,'/home/chirag/Pictures/Screenshot from 2021-11-08 19-29-05.png','Hero','go','is','01 January, 2000','/home/chirag/Pictures/Screenshot from 2021-11-11 18-01-54.png','male','daw','daw','123','fish','goat','yeah','hero.com',123456,123745,458485),(3,'','','','','','','male','','','548','','','','',548,4585,45);
+/*!40000 ALTER TABLE `Admission_Details` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `Branch_details` (
   `AcademicYear` varchar(30) NOT NULL,
   `Course` varchar(30) NOT NULL,
   KEY `Std_ID` (`Std_ID`),
-  CONSTRAINT `Branch_details_ibfk_1` FOREIGN KEY (`Std_ID`) REFERENCES `Admission Details` (`StudentID`)
+  CONSTRAINT `Branch_details_ibfk_1` FOREIGN KEY (`Std_ID`) REFERENCES `Admission_Details` (`StudentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

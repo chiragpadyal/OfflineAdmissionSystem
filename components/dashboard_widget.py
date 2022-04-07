@@ -255,6 +255,7 @@ class Ui_Form(object):
         self.verticalLayout_3.addWidget(self.statistic_hcont)
         self.verticalLayout.addWidget(self.widget)
         self.pushButton.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(0))
+        self.pushButton_3.clicked.connect(lambda: Obj.stackedWidget.setCurrentIndex(7))
         self.listWidget.currentItemChanged.connect(lambda: self.label_11.setText(str(self.listWidget.currentItem().text())))
         self.data = MysqlConn.settings.value('userid')
         self.label.setPixmap(QtGui.QPixmap(self.data[3]))

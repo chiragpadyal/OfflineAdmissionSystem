@@ -30,9 +30,7 @@ class Ui_Form(object):
         self.lineEdit = QtWidgets.QLineEdit(self.widget)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_2.addWidget(self.lineEdit)
-        self.pushButton = QtWidgets.QPushButton(self.widget)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout_2.addWidget(self.pushButton)
+
         self.comboBox = QtWidgets.QComboBox(self.widget)
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
@@ -130,20 +128,21 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         self.TableMapper()
-        self.pushButton.clicked.connect(lambda: self.tableWidget.removeRow(0))
         self.RefreshBtn.clicked.connect(lambda: self.TableMapper())
+        self.comboBox.currentIndexChanged.connect(lambda: self.TableMapper())
+        self.lineEdit.textChanged.connect(lambda: self.TableMapper())
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Admin Panel"))
         self.lineEdit.setPlaceholderText(_translate("Form", "Search By Name...."))
-        self.pushButton.setText(_translate("Form", "Find"))
         self.comboBox.setItemText(0, _translate("Form", "All"))
-        self.comboBox.setItemText(1, _translate("Form", "IT"))
-        self.comboBox.setItemText(2, _translate("Form", "CS"))
-        self.comboBox.setItemText(3, _translate("Form", "Civil"))
-        self.comboBox.setItemText(4, _translate("Form", "Mech"))
+        self.comboBox.setItemText(1, _translate("Form", "Civil Engineering"))
+        self.comboBox.setItemText(2, _translate("Form", "Mechanical Engineering"))
+        self.comboBox.setItemText(3, _translate("Form", "Information Technology"))
+        self.comboBox.setItemText(4, _translate("Form", "Computer Science"))
         # item = self.tableWidget.verticalHeaderItem(0)
         # item.setText(_translate("Form", "Row_1"))
 
@@ -217,7 +216,18 @@ class Ui_Form(object):
             self.tableWidget.removeRow(0)
         mydb = MysqlConn.mydb
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT  a.`ProfilePic`, a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`Address1`, a.`City`, a.`State`, a.`Country`, a.`Zipcode`, a.`PhoneNo1`, a.`PhoneNo2` , b.SSC, b.HSC, b.mhtcet, b.jee, b.ssc_file, b.hsc_file, b.mhcet_file, b.jee_file, b.ssc_date, b.hsc_date, b.mhcet_date, b.jee_date FROM `Admission Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID ")
+        QuerySql = "SELECT  a.`ProfilePic`, a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`Address1`, a.`City`, a.`State`, a.`Country`, a.`Zipcode`, a.`PhoneNo1`, a.`PhoneNo2` , b.SSC, b.HSC, b.mhtcet, b.jee, b.ssc_file, b.hsc_file, b.mhcet_file, b.jee_file, b.ssc_date, b.hsc_date, b.mhcet_date, b.jee_date FROM `Admission_Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID "
+        # QuerySql = "SELECT a.`StudentID`, a.`ProfilePic`, a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`Address1`, a.`City`, a.`State`, a.`Country`, a.`Zipcode`, a.`PhoneNo1`, a.`PhoneNo2` , b.SSC, b.HSC, b.mhtcet, b.jee, b.ssc_file, b.hsc_file, b.mhcet_file, b.jee_file, b.ssc_date, b.hsc_date, b.mhcet_date, b.jee_date FROM `Admission_Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID "
+        if self.comboBox.currentText() == 'All' :
+            pass
+        else:
+            QuerySql = QuerySql +  " where b.Branch = '" + self.comboBox.currentText() + "'"
+        
+        if self.lineEdit.text():
+            QuerySql = QuerySql +  " AND CONCAT_WS('',a.Firstname, a.Middlename, a.Lastname) LIKE '%" + self.lineEdit.text() + "%'" 
+
+        QuerySql = QuerySql + "AND b.HSC > 80 AND b.SSC > 80 ORDER BY b.mhtcet DESC"
+        mycursor.execute(QuerySql)
         myresult = mycursor.fetchall()
         for x in myresult:
             a = self.tableWidget.rowCount() 
