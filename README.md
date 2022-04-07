@@ -75,7 +75,7 @@ App Key of gmail setup for mail-send.py
 
 ## Authors
 
-- [@Chirag Padyal](https://www.github.com/octokatherine)
+- [@Chirag Padyal](https://github.com/FreakStar03/)
 - [@Anuj-Kundar](https://www.github.com/Anuj-Kundar)
 - Vishal Bangar
 - Jaykumar Nayi
