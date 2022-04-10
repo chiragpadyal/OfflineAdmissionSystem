@@ -9,3 +9,5 @@ DatabaseBackup/
 CMakeLists.txt
 build/
 .prettierrc
+*.spec
+*.pdf
