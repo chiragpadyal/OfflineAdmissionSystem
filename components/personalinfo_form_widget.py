@@ -1,4 +1,5 @@
 
+import re
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
 from datetime import date
@@ -255,6 +256,14 @@ class Ui_Form(object):
         self.id_proof_drop_down.currentIndexChanged.connect(lambda: self.clicker("id"))
         self.dob_setter.editingFinished.connect(lambda: self.date_method())
 
+        self.onlyInt = QtGui.QIntValidator()
+        self.phone_no.setValidator(self.onlyInt)
+        self.phone_no_opt.setValidator(self.onlyInt)
+        self.tele_phone_no_opt.setValidator(self.onlyInt)
+        self.zipcode.setValidator(self.onlyInt)
+        self.zipcode.setMaxLength(7)
+
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -312,7 +321,23 @@ class Ui_Form(object):
         self.female_radioButton.setText(_translate("Form", "Female"))
         self.gender_label.setText(_translate("Form", "Gender:"))
 
+    def validEmail(self, email):
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        if(re.fullmatch(regex, email)):
+            return False
+        else:
+            return True
+
+    def validNumber(self, phone_nuber):
+        pattern = re.compile("^[\d1-9]{10}$", re.IGNORECASE)
+        if pattern.match(phone_nuber) is not None :
+            return False
+        else :
+            return True
+
+
     def UploadForm(self, Obj):
+
         sql = "INSERT INTO `Admission_Details` (`StudentID`, `ProfilePic`, `Firstname`, `Middlename`, `Lastname`, `DOB`, `IDProof`, `Gender`, `Address1`, `Address2`, `Zipcode`, `City`, `State`, `Country`, `EmailID`, `PhoneNo1`, `PhoneNo2`, `TelePhoneNo`) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) "
         val = (
             MysqlConn.RowCount() + 1,
@@ -334,6 +359,21 @@ class Ui_Form(object):
             self.phone_no_opt.text(),
             self.tele_phone_no_opt.text()
                 )
-        
-        if MysqlConn.UploadForm(sql, val, False) == True:  Obj.stackedWidget.setCurrentIndex(1)
-        else: MysqlConn.AlertPop("Wrong Or Empty Data!")
+        for v in val:
+            if len(str(v)) == 1: 
+                print(v)
+                MysqlConn.AlertPop("Empty Data!")
+                break
+            elif self.validEmail(self.email_id.text()):
+                MysqlConn.AlertPop("Wrong Email")
+                break
+            elif self.validNumber(self.phone_no.text()):
+                MysqlConn.AlertPop("Wrong phone no")
+                break
+            else: 
+                if MysqlConn.UploadForm(sql, val, False) == True: 
+                    Obj.stackedWidget.setCurrentIndex(1)
+                    break
+                else:
+                    MysqlConn.AlertPop("Wrong Or Empty Data!")
+                    break

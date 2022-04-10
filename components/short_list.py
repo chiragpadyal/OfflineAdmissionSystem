@@ -2,9 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtPrintSupport
 import sys
 import mysql.connector
-from MysqlConn.mail_send import message
-from decouple import config
-
+from components.mailThread import myThread
 
 
 # import MysqlConn
@@ -19,7 +17,10 @@ html = """<html>
     </style>
     </head>"""
 class Ui_Form(object):
-
+    civil = []
+    mech = []
+    IT = []
+    CS = []
     def __init__(self, Form): #step 2 init
         self.setupUi( Form )
 
@@ -107,8 +108,9 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        self.TableMapper()
-        self.comboBox.currentIndexChanged.connect(lambda: self.TableMapper())
+        self.TableMapper(None, self.comboBox.currentText())
+        self.comboBox.setCurrentIndex(0)
+        self.comboBox.currentIndexChanged.connect(lambda: self.TableMapper(None, self.comboBox.currentText()))
         self.pushButton.clicked.connect(lambda: self.controll())
         self.pushButton2.clicked.connect(lambda: self.mailall())
 
@@ -157,7 +159,7 @@ class Ui_Form(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
 
-    def TableMapper(self):
+    def TableMapper(self, table, currentText):
         #combine
         while (self.tableWidget.rowCount() > 0):
             self.tableWidget.removeRow(0)
@@ -171,12 +173,20 @@ class Ui_Form(object):
         mycursor = mydb.cursor()
         QuerySql = "SELECT a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`PhoneNo1`,b.SSC, b.HSC, b.mhtcet, b.jee FROM `Admission_Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID "
         # QuerySql = "SELECT a.`StudentID`, a.`ProfilePic`, a.`Firstname`, a.`Middlename`, a.`Lastname`, a.`DOB`, a.`Gender`, b.Branch, b.Branch_Preferred, a.`EmailID`, a.`Address1`, a.`City`, a.`State`, a.`Country`, a.`Zipcode`, a.`PhoneNo1`, a.`PhoneNo2` , b.SSC, b.HSC, b.mhtcet, b.jee, b.ssc_file, b.hsc_file, b.mhcet_file, b.jee_file, b.ssc_date, b.hsc_date, b.mhcet_date, b.jee_date FROM `Admission_Details` as a INNER JOIN `Academic_Details` as b  ON a.`StudentID` = b.Std_ID "
-        QuerySql = QuerySql +  " where b.Branch = '" + self.comboBox.currentText() + "'"
+        QuerySql = QuerySql +  " where b.Branch = '" + currentText + "'"
         QuerySql = QuerySql + " ORDER BY b.mhtcet DESC, b.HSC DESC, b.SSC DESC LIMIT 10"
         mycursor.execute(QuerySql)
         myresult = mycursor.fetchall()
         for x in myresult:
-            # self.mailall(x[7])
+            if (table == "civil"):
+                self.civil.append(x[7])
+            elif (table=="IT"):
+                self.IT.append(x[7])
+            elif( table=="mech" ):
+                self.mech.append( x[7] )
+            elif(table=="CS"):
+                self.CS.append( x[7])
+
             a = self.tableWidget.rowCount() 
             b = a + 1
             self.tableWidget.setRowCount(b)
@@ -202,14 +212,24 @@ class Ui_Form(object):
 
 
     def controll(self):
-        self.comboBox.setCurrentIndex(0)
+        # self.comboBox.setCurrentIndex(0)
+        # self.print_pdf("Civil")
+        # self.comboBox.setCurrentIndex(1)
+        # self.print_pdf("Mechanical")
+        # self.comboBox.setCurrentIndex(2)
+        # self.print_pdf("Information Technology")
+        # self.comboBox.setCurrentIndex(3)
+        # self.print_pdf("Computer Science")
+
+        self.TableMapper("civil", "Civil Engineering")
         self.print_pdf("Civil")
-        self.comboBox.setCurrentIndex(1)
+        self.TableMapper("mech", "Mechanical Engineering")
         self.print_pdf("Mechanical")
-        self.comboBox.setCurrentIndex(2)
+        self.TableMapper("IT", "Information Technology")
         self.print_pdf("Information Technology")
-        self.comboBox.setCurrentIndex(3)
+        self.TableMapper("CS", "Computer Science")
         self.print_pdf("Computer Science")
+        self.TableMapper(None, self.comboBox.currentText())
 
         self.printall()
 
@@ -247,9 +267,14 @@ class Ui_Form(object):
         doc.print_(printer)
 
     def mailall(self):
-        for x in range(11):
-            message("20104034.chirag.padyal@gmail.com", str(config('KEY')))
-            message("freakstar03@gmail.com", str(config('KEY')))
+        myThread("thread1" , self.CS).start()
+        myThread("thread2" , self.IT).start()
+        myThread("thread3" , self.civil).start()
+        myThread("thread4" , self.mech).start()
+        # print(self.CS)
+        # print(self.IT)
+        # print(self.civil)
+        # print(self.mech)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

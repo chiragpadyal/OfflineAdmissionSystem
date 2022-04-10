@@ -323,6 +323,18 @@ class Ui_Form(object):
         self.pushButton_3.clicked.connect(lambda: self.FileUpload('hsc'))
         self.pushButton_4.clicked.connect(lambda: self.FileUpload('mhcet'))
         self.pushButton_5.clicked.connect(lambda: self.FileUpload('jee'))
+
+
+        self.onlyInt = QtGui.QIntValidator()
+        self.lineEdit_4.setValidator(self.onlyInt)
+        self.lineEdit_5.setValidator(self.onlyInt)
+        self.lineEdit_6.setValidator(self.onlyInt)
+        self.lineEdit_7.setValidator(self.onlyInt)
+        self.lineEdit_4.setMaxLength(3)
+        self.lineEdit_5.setMaxLength(3)
+        self.lineEdit_6.setMaxLength(3)
+        self.lineEdit_7.setMaxLength(3)
+
         self.BackBtn.clicked.connect(lambda: MysqlConn.Backward(Obj, Obj.stackedWidget.currentIndex()) )
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

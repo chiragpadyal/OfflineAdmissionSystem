@@ -54,7 +54,7 @@ def UploadForm( sql, val, a):
             print("Mysql Error.: " , err)
             return False 
         else :
-            message(val_arr[0][14], str(config('KEY')))
+            message(val_arr[0][14])
             sql_arr.clear()
             val_arr.clear()
             return True

@@ -3,9 +3,10 @@ from smtplib import SMTPResponseException
 from getpass import getpass
 from decouple import config
 
-def message(receiver_add , password):
+def message(receiver_add):
 	
 	sender_add='freakstar03@gmail.com' #storing the sender's mail id
+	password=str(config('KEY'))
 	 #creating the SMTP server object by giving SMPT server address and port number
 	try:
 		smtp_server=smtplib.SMTP("smtp.gmail.com",587)
@@ -21,7 +22,7 @@ def message(receiver_add , password):
 		"""
 		#sending the mail by specifying the from and to address and the message 
 		smtp_server.sendmail(sender_add,receiver_add,message)
-		print('Successfully the mail is sent') #priting a message on sending the mail
+		# print('Successfully the mail is sent') #priting a message on sending the mail
 	except SMTPResponseException as err:
 		print('error : ', err)
 	finally:
