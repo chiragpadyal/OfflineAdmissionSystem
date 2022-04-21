@@ -342,7 +342,7 @@ class Ui_Form(object):
         self.personal_info_header_3.setText(_translate("Form", "Registration Form"))
         self.lineEdit_6.setPlaceholderText(_translate("Form", "-/10"))
         self.label_12.setText(_translate("Form", "JEE Marksheet"))
-        self.pushButton.setText(_translate("Form", "Submit"))
+        self.pushButton.setText(_translate("Form", "Next"))
         self.pushButton_3.setText(_translate("Form", "Select File"))
         self.comboBox_2.setItemText(0, _translate("Form", "----"))
         self.comboBox_2.setItemText(1, _translate("Form", "IT"))

@@ -13,14 +13,14 @@ services:
                         - ./init:/docker-entrypoint-initdb.d
                 ports:
                         - 3307:3306
-#    phpmyadmin:
-#	image: phpmyadmin/phpmyadmin
-#	container_name: phpmyadmin_LR
-#	links: 
-#	    - db:db
-#	ports:
-#	    - 8002:80
-#	environment:
-#	    MYSQL_USER: user
-#	    MYSQL_PASSWORD: test
-#	    MYSQL_ROOT_PASSWORD: test
+        phpmyadmin:
+                image: phpmyadmin/phpmyadmin
+                container_name: phpmyadmin_LR
+                links: 
+                        - db:db
+                ports:
+                        - 8002:80
+                environment:
+                        MYSQL_USER: root
+                        MYSQL_PASSWORD: root
+                        MYSQL_ROOT_PASSWORD: root

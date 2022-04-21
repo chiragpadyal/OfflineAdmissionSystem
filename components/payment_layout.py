@@ -145,9 +145,6 @@ class Ui_Payment(object):
         self.Comps_6 = QtWidgets.QRadioButton(self.groupBox_2)
         self.Comps_6.setObjectName("Comps_6")
         self.verticalLayout_5.addWidget(self.Comps_6)
-        self.Comps_4 = QtWidgets.QRadioButton(self.groupBox_2)
-        self.Comps_4.setObjectName("Comps_4")
-        self.verticalLayout_5.addWidget(self.Comps_4)
         self.It_button = QtWidgets.QRadioButton(self.groupBox_2)
         self.It_button.setChecked(True)
         self.It_button.setObjectName("It_button")
@@ -216,13 +213,13 @@ class Ui_Payment(object):
         self.Comps_6.setText(_translate("Form", "Mechanical Engineering"))
         self.It_button.setText(_translate("Form", "Information Technology"))
         self.Comps_but.setText(_translate("Form", "Computer Science"))
-        self.pushButton.setText(_translate("Form", "Print"))
+        self.pushButton.setText(_translate("Form", "Submit"))
         self.BackBtn.setText(_translate("Payment", "Back"))
 
     def checkAcademic(self):
         if self.Comps_3.isChecked()    : return self.Comps_3.text()
         if self.Comps_6.isChecked() : return self.Comps_6.text()
-        if self.Comps_4.isChecked() : return self.Comps_4.text()
+        # if self.Comps_4.isChecked() : return self.Comps_4.text()
         if self.It_button.isChecked() : return self.It_button.text()
         if self.Comps_but.isChecked() : return self.Comps_but.text()
 
