@@ -22,7 +22,7 @@ docker: MysqlDocker/docker-compose.yml
 
 docker-stop: 
 	docker container stop mysql_PythonMiniProject 
- 
+
 docker-start: 
 	docker container start mysql_PythonMiniProject 
 
